@@ -15,7 +15,7 @@ datasource db {
 
 model User {
   id           Int            @id @default(autoincrement())
-  name         String
+  full_name    String
   email        String
   password     String
   role         Role           @default(USER)
@@ -23,11 +23,13 @@ model User {
   created_at   DateTime       @default(now())
   EventBooking EventBooking[]
 
+  @@index(fields: [full_name])
   @@map("users")
 }
 
 model Event {
   id           Int            @id @default(autoincrement())
+  event_name   String
   description  String
   event_date   DateTime
   duration     Int
@@ -36,6 +38,7 @@ model Event {
   updated_at   DateTime       @updatedAt
   EventBooking EventBooking[]
 
+  @@index(fields: [event_name])
   @@map("events")
 }
 
