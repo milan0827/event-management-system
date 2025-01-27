@@ -39,7 +39,7 @@ const AppTitle = ({
   const Heading = headingLevel;
   return (
     <Heading
-      className={`${cn(appTitle({ variant, size }))} ${className}`}
+      className={`${cn(appTitle({ variant, size }) + " " + className)} `}
       {...props}
     >
       {title}

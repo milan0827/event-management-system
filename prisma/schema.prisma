@@ -16,10 +16,9 @@ datasource db {
 model User {
   id           Int            @id @default(autoincrement())
   full_name    String
-  email        String
+  email        String         @unique
   password     String
   role         Role           @default(USER)
-  photo        String
   created_at   DateTime       @default(now())
   EventBooking EventBooking[]
 
@@ -28,26 +27,31 @@ model User {
 }
 
 model Event {
-  id           Int            @id @default(autoincrement())
-  event_name   String
-  description  String
-  event_date   DateTime
-  duration     Int
-  venue        String
-  created_at   DateTime       @default(now())
-  updated_at   DateTime       @updatedAt
-  EventBooking EventBooking[]
+  id          Int         @id @default(autoincrement())
+  event_name  String
+  description String
+  event_date  DateTime
+  duration    Int
+  venue       String
+  created_at  DateTime    @default(now())
+  updated_at  DateTime    @updatedAt
+  status      EventStatus @default(UPCOMING)
 
   @@index(fields: [event_name])
   @@map("events")
 }
 
 model EventBooking {
-  id       Int   @id @default(autoincrement())
-  event    Event @relation(fields: [event_id], references: [id])
+  id       Int  @id @default(autoincrement())
   event_id Int
-  user     User  @relation(fields: [user_id], references: [id])
+  user     User @relation(fields: [user_id], references: [id])
   user_id  Int
+}
+
+enum EventStatus {
+  ONGOING
+  UPCOMING
+  FINISHED
 }
 
 enum Role {
