@@ -23,7 +23,6 @@ ModuleRegistry.registerModules([
 ]);
 
 const EventListTable = ({ rowData }: { rowData: Event[] | null }) => {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const [pageSize, setPageSize] = useState(10);
 
