@@ -41,7 +41,7 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <header
-      className={`w-full px-6 py-3 fixed top-0 transition-all duration-200 ${
+      className={`w-full px-6 fixed top-0 transition-all duration-200 py-2  ${
         isDark
           ? "bg-gray-200/90 backdrop-blur-sm shadow-[0_5px_5px_rgba(0,0,0,0.1)]"
           : "bg-transparent"
@@ -49,12 +49,16 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
     >
       <nav className="flex w-full items-center justify-between">
         <div className="text-white">Logo</div>
-        <ul className="text-black flex items-center justify-center gap-4">
+        <ul
+          className={`text-black flex items-center justify-center gap-4 ${
+            isDark ? "[&>li>button>svg]:fill-gray-800" : ""
+          }`}
+        >
           {NAVBAR_LIST.map((list) => (
             <li key={list.id}>
               <Link
                 href={`${list.link}`}
-                className={`hover:after:w-full after:w-0 after:h-[1.4px]  relative after:absolute after:-bottom-2 after:left-0 pr-1 after:transition-[width] after:duration-700 ${
+                className={`hover:after:w-full after:w-0 after:h-[1.4px]  relative after:absolute after:-bottom-1 after:left-0 pr-1 after:transition-[width] after:duration-700 ${
                   isDark
                     ? "text-gray-800 after:bg-gray-800"
                     : "text-gray-200 after:bg-gray-200"

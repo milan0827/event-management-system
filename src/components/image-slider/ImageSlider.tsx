@@ -4,8 +4,16 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import AppTitle from "../app-title/AppTitle";
 import { Slider } from "@/types/type";
+import ArrowLeftIcon from "@/assets/icons/ArrowLeftIcon";
+import ArrowRightIcon from "@/assets/icons/ArrowRightIcon";
 
-const ImageSlider = ({ slider }: { slider: Slider[] }) => {
+const ImageSlider = ({
+  slider,
+  isNavigateIcon = true,
+}: {
+  slider: Slider[];
+  isNavigateIcon?: boolean;
+}) => {
   const [step, setStep] = useState(0);
 
   useEffect(() => {
@@ -38,7 +46,7 @@ const ImageSlider = ({ slider }: { slider: Slider[] }) => {
               alt="Defcon event"
               className="w-full h-full block object-cover"
             />
-            <div className="w-full h-full  absolute top-0 bg-[linear-gradient(to_bottom,transparent_,#000000ab)] [&>div>p]:hover:text-white [&>div>p]:transition-color [&>div>p]:duration-500">
+            <div className="w-full h-full  absolute top-0 bg-[linear-gradient(to_bottom,#00003278_,#000000ab)] [&>div>p]:hover:text-white [&>div>p]:transition-color [&>div>p]:duration-500">
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                 <AppTitle
                   title="DEFCON"
@@ -50,15 +58,22 @@ const ImageSlider = ({ slider }: { slider: Slider[] }) => {
           </div>
         ))}
       </div>
-      <button className="text-white absolute top-1/2" onClick={handlePrevious}>
-        Prev
-      </button>
-      <button
-        className="text-white absolute top-1/2 right-0"
-        onClick={handleNext}
-      >
-        Next
-      </button>
+      {isNavigateIcon ? (
+        <>
+          <button
+            className="text-white absolute top-1/2 p-2 bg-gray-200/20 hover:bg-gray-200/60 transition-color duration-300 rounded-full ml-4"
+            onClick={handlePrevious}
+          >
+            <ArrowLeftIcon className="w-10 h-10 fill-gray-800/60" />
+          </button>
+          <button
+            className="text-white absolute top-1/2 right-0 p-2 bg-gray-200/20 hover:bg-gray-200/60 transition-color duration-300 rounded-full mr-4"
+            onClick={handleNext}
+          >
+            <ArrowRightIcon className="w-10 h-10 fill-gray-800/60" />
+          </button>
+        </>
+      ) : null}
     </div>
   );
 };

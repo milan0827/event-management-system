@@ -9,7 +9,7 @@ const labelStyle = cva("text-[16px] cursor-pointer", {
   variants: {
     labelVariants: {
       default: "text-zinc-600",
-      secondary: "text-blue-500",
+      secondary: "text-gray-200",
     },
   },
 

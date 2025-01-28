@@ -7,9 +7,11 @@ import { useFormStatus } from "react-dom";
 import AppTitle from "../app-title/AppTitle";
 import { Button } from "../button/Button";
 import TextField from "../text-field/TextField";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
   const [errors, setErrors] = useState<LoginErrors["errors"]>({});
+  const router = useRouter();
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -17,23 +19,23 @@ const LoginForm = () => {
     const formData = new FormData(form);
 
     const res = await login(formData);
+    console.log("RESPONSE", res);
     if (res.status) {
       alert(res.message);
-      redirect("/manage-events");
-    }
-    if (!res.status) setErrors({ ...res.errors });
+      router.push("/");
+    } else setErrors({ ...res.errors });
   }
   return (
     <form
       className="w-[30rem] flex flex-col justify-center gap-4"
       onSubmit={handleSubmit}
     >
-      <AppTitle title="Login EMS" />
+      <AppTitle title="Login EMS" className="text-gray-200 font-semibold" />
       <div className="flex flex-col gap-3">
         {" "}
         <TextField
           label="Email"
-          labelProps={{ htmlFor: "email" }}
+          labelProps={{ htmlFor: "email", labelVariants: "secondary" }}
           id="email"
           name="email"
           type="email"
@@ -41,7 +43,7 @@ const LoginForm = () => {
         />
         <TextField
           label="Password"
-          labelProps={{ htmlFor: "password" }}
+          labelProps={{ htmlFor: "password", labelVariants: "secondary" }}
           id="password"
           name="password"
           type="password"

@@ -6,12 +6,46 @@ import {
   ClientSideRowModelModule,
   ColDef,
   ValidationModule,
+  PaginationModule,
+  ModuleRegistry,
+  PaginationChangedEvent,
+  // ServerSideRow,
 } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
-import { redirect } from "next/navigation";
+import { redirect, useRouter, useSearchParams } from "next/navigation";
 import { Button } from "../button/Button";
+import { useCallback, useEffect, useMemo, useState } from "react";
+
+ModuleRegistry.registerModules([
+  PaginationModule,
+  ClientSideRowModelModule,
+  ValidationModule /* Development Only */,
+]);
 
 const EventListTable = ({ rowData }: { rowData: Event[] | null }) => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [pageSize, setPageSize] = useState(10);
+
+  const onPaginationChanged = useCallback((params: PaginationChangedEvent) => {
+    const param = new URLSearchParams(searchParams.toString());
+    param.set("pageSize", String(pageSize));
+    const newPageSize = params.api.paginationGetPageSize();
+    // router.push(`/manage-events?pageSize=${newPageSize}`);
+    console.log("INITLA", searchParams.get("pageSize"));
+    setPageSize(newPageSize);
+  }, []);
+
+  const pagination = useMemo(() => {
+    return {
+      pagination: true,
+      paginationPageSize: 10,
+      paginationPageSizeSelector: [10, 20, 30, 40, 50],
+    };
+  }, []);
+
+  console.log("Pagination", pageSize);
+
   const colDefs: ColDef<Event>[] = [
     {
       field: "event_name",
@@ -36,7 +70,6 @@ const EventListTable = ({ rowData }: { rowData: Event[] | null }) => {
     {
       headerName: "Actions",
       cellRenderer: (params: { data: Event }) => {
-        console.log("EVENT SCHEMA", params.data?.id);
         return (
           <div className="flex items-center justify-center gap-2">
             <Button
@@ -71,12 +104,16 @@ const EventListTable = ({ rowData }: { rowData: Event[] | null }) => {
   ];
 
   return (
-    <div className="h-[75vh]">
+    <div className="h-[76vh]">
       <AgGridReact
-        modules={[ClientSideRowModelModule, ValidationModule]}
+        animateRows
         rowData={rowData}
         columnDefs={colDefs}
-        rowHeight={60}
+        rowHeight={50}
+        pagination
+        paginationPageSize={pageSize}
+        paginationPageSizeSelector={pagination.paginationPageSizeSelector}
+        onPaginationChanged={onPaginationChanged}
       />
     </div>
   );

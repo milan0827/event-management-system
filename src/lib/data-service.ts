@@ -1,8 +1,12 @@
 import { prisma } from "../../prisma_init";
 
-export const getAllEvents = async () => {
+export const getAllEvents = async (take?: number, pageNo?: number) => {
   try {
-    const data = await prisma.event.findMany();
+    const data = await prisma.event.findMany({
+      skip: (pageNo || 1 - 1) * (take || 100),
+      take: take || 100,
+    });
+
     return { data, error: null };
   } catch (error) {
     return { error, data: null };

@@ -28,7 +28,7 @@ const SLIDER: Slider[] = [
   },
   {
     id: 4,
-    image: "/images/defcon.jpg",
+    image: "/images/events.jpeg",
     title: "Defcon",
     description:
       " Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eos, distinctio amet, quia quidem ea nesciunt vero consequatur repellat quisquam dicta reprehenderit aliquid non animi dolore inventore. Aliquam natus cum a!",
@@ -36,13 +36,14 @@ const SLIDER: Slider[] = [
 ];
 
 const page = async () => {
-  const { data: events, error } = await getAllEvents();
+  const { data: events, error } = await getAllEvents(5, 1);
+  console.log("EVENTS", events);
 
   if (error) return alert(error);
 
   return (
-    <div className="max-w-[1200px] mx-auto ">
-      <div className="h-[60vh] lg:h-[75vh] w-full px-4 overflow-hidden">
+    <div className="">
+      <div className="h-[60vh] lg:h-[80vh] w-full  overflow-hidden">
         <ImageSlider slider={SLIDER} />
       </div>
 

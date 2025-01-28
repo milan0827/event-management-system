@@ -16,7 +16,7 @@ const ADMIN_SIDEBAR_LIST = [
 
 const Sidebar = () => {
   return (
-    <nav className="bg-zinc-300 border-r border-zinc-400 p-2 w-[20rem] min-h-screen ">
+    <nav className="bg-zinc-300 border-r border-zinc-400 p-2 w-[20rem] ">
       <AppTitle title="EMS" />
       <ul className="flex flex-col gap-1">
         {ADMIN_SIDEBAR_LIST.map((list) => (

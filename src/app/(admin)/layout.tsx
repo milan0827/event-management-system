@@ -8,7 +8,7 @@ export default function Layout({
 }>) {
   return (
     // <ProtectedRoutes>
-    <div className="flex ">
+    <div className="flex flex-grow  justify-center ">
       <Sidebar />
       <main className="max-w-[1250px]  mx-auto p-6 flex-1">{children}</main>
     </div>

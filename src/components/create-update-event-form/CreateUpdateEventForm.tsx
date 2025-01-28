@@ -28,7 +28,6 @@ const CreateUpdateEventForm = ({ data }: { data?: any }) => {
     try {
       if (!data) {
         const res = await createEvents(formData);
-        console.log(res);
         if (res.status) {
           alert("Event successfully created");
           form.reset();

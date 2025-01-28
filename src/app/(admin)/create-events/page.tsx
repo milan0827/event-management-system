@@ -3,7 +3,7 @@ import CreateUpdateEventForm from "@/components/create-update-event-form/CreateU
 
 const page = () => {
   return (
-    <div className="h-screen min-h-screen ">
+    <div className=" ">
       <AppTitle title="Create Events" />
       <CreateUpdateEventForm />
     </div>

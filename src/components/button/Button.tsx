@@ -36,7 +36,7 @@ export const Button = ({ label, variant, size, ...props }: ButtonProps) => {
   const { className } = props;
   return (
     <button
-      className={`${cn(button({ variant, size }))} ${className}`}
+      className={`${cn(button({ variant, size }) + " " + className)} `}
       {...props}
     >
       {label}

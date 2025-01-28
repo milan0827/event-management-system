@@ -26,30 +26,26 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         let user = null;
 
-        user = await prisma.user.findUnique({
-          where: {
-            email: credentials.email as string,
-          },
-        });
+        try {
+          user = await prisma.user.findUnique({
+            where: {
+              email: credentials.email as string,
+            },
+          });
 
-        if (!user) throw new CustomError("Invalid credentials");
+          if (!user) throw new Error("User not found");
 
-        const isPasswordMatched = await bcrypt.compare(
-          credentials.password as string,
-          user.password
-        );
+          const isPasswordMatched = await bcrypt.compare(
+            credentials.password as string,
+            user.password
+          );
 
-        if (!isPasswordMatched) throw new CustomError("Invalid credentials");
+          if (!isPasswordMatched) throw new CustomError("Invalid credentials");
 
-        // const accessToken = jwt.sign(
-        //   { email: user.id, role: user.role },
-        //   "hello-world",
-        //   {
-        //     expiresIn: "1h",
-        //   }
-        // );
-
-        return { ...user, id: user.id.toString(), role: user.role };
+          return { ...user, id: user.id.toString(), role: user.role };
+        } catch (error) {
+          throw error;
+        }
       },
     }),
   ],
