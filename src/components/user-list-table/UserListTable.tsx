@@ -1,7 +1,6 @@
 "use client";
 
-import { deleteEvents } from "@/app/actions/eventAction";
-import { Event } from "@prisma/client";
+import { User } from "@prisma/client";
 import {
   ClientSideRowModelModule,
   ColDef,
@@ -12,10 +11,10 @@ import {
   themeQuartz,
   ValidationModule,
 } from "ag-grid-community";
-import { AgGridReact } from "ag-grid-react";
-import { redirect, useSearchParams } from "next/navigation";
-import { useCallback, useMemo, useState } from "react";
 import { Button } from "../button/Button";
+import { redirect, useSearchParams } from "next/navigation";
+import { AgGridReact } from "ag-grid-react";
+import { useCallback, useMemo, useState } from "react";
 
 ModuleRegistry.registerModules([
   PaginationModule,
@@ -25,7 +24,7 @@ ModuleRegistry.registerModules([
 
 const colorTheme = themeQuartz.withPart(colorSchemeDarkBlue);
 
-const EventListTable = ({ rowData }: { rowData: Event[] | null }) => {
+const UserListTable = ({ rowData }: { rowData: User[] | null }) => {
   const searchParams = useSearchParams();
   const [pageSize, setPageSize] = useState(10);
 
@@ -46,58 +45,48 @@ const EventListTable = ({ rowData }: { rowData: Event[] | null }) => {
     };
   }, []);
 
-  console.log("Pagination", pageSize);
-
-  const colDefs: ColDef<Event>[] = [
+  const colDefs: ColDef<User>[] = [
     {
-      field: "event_name",
-      headerName: "Event Name",
+      field: "full_name",
+      headerName: "Full Name",
     },
     {
-      field: "description",
-      headerName: "Description",
+      field: "email",
+      headerName: "Email",
     },
     {
-      field: "duration",
-      headerName: "Duration",
-    },
-    {
-      field: "venue",
-      headerName: "Venue",
-    },
-    {
-      field: "event_date",
-      headerName: "Event Date",
+      field: "role",
+      headerName: "Role",
     },
     {
       headerName: "Actions",
-      cellRenderer: (params: { data: Event }) => {
+      cellRenderer: (params: { data: User }) => {
         return (
           <div className="flex items-center justify-center gap-2">
             <Button
               label="ED"
               variant={"primary"}
               size={"small"}
-              onClick={() => redirect(`/update-events/${params.data.id}`)}
+              onClick={() => redirect(`/update-users/${params.data.id}`)}
             />
             <Button
               label="VD"
               variant={"secondary"}
               size={"small"}
-              onClick={() => redirect(`/events/${params.data.id}`)}
+              onClick={() => redirect(`/users/${params.data.id}`)}
             />
             <Button
               label="DL"
               variant={"destructive"}
               size={"small"}
-              onClick={async () => {
-                const { error } = await deleteEvents(params.data.id);
-                if (error) {
-                  alert("Failed to delete, Please try again later");
-                } else {
-                  alert("Successfully deleted");
-                }
-              }}
+              // onClick={async () => {
+              //   const { error } = await deleteEvents(params.data.id);
+              //   if (error) {
+              //     alert("Failed to delete, Please try again later");
+              //   } else {
+              //     alert("Successfully deleted");
+              //   }
+              // }}
             />
           </div>
         );
@@ -106,7 +95,7 @@ const EventListTable = ({ rowData }: { rowData: Event[] | null }) => {
   ];
 
   return (
-    <div className="">
+    <div className="h-[76vh] w-full">
       <AgGridReact
         animateRows
         rowData={rowData}
@@ -117,10 +106,14 @@ const EventListTable = ({ rowData }: { rowData: Event[] | null }) => {
         paginationPageSizeSelector={pagination.paginationPageSizeSelector}
         onPaginationChanged={onPaginationChanged}
         theme={colorTheme}
-        domLayout="autoHeight"
+        domLayout="normal"
+        className="w-full"
+        defaultColDef={{
+          flex: 1,
+        }}
       />
     </div>
   );
 };
 
-export default EventListTable;
+export default UserListTable;

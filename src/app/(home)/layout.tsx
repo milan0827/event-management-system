@@ -1,7 +1,7 @@
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <main>{children}</main>
+      <main className="-mt-12">{children}</main>
     </>
   );
 };

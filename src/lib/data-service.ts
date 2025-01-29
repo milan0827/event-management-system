@@ -54,3 +54,32 @@ export const getUserByEmail = async (email: string) => {
 
   return user;
 };
+
+export const getAllUser = async () => {
+  try {
+    const users = await prisma.user.findMany({
+      omit: {
+        password: true,
+      },
+    });
+    return { users, error: null };
+  } catch (error) {
+    return { error };
+  }
+};
+
+export const getUser = async (userId: number) => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+      omit: {
+        password: true,
+      },
+    });
+    return { user, error: null };
+  } catch (error) {
+    return { error };
+  }
+};

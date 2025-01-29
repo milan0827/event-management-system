@@ -59,7 +59,7 @@ const CreateUpdateEventForm = ({ data }: { data?: any }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col justify-center gap-5 bg-white p-5 rounded-md"
+      className="flex flex-col justify-center gap-5 bg-gray-800 p-5 rounded-md"
     >
       <div className="grid grid-cols-2 gap-3">
         <TextField

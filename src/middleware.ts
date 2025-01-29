@@ -15,6 +15,7 @@ export default async function middleware(req: NextRequest) {
     "/manage-events",
     "/update-events",
     "/events/:eventId",
+    "/manage-users",
   ];
 
   if (!isAuthenticated)
@@ -35,5 +36,6 @@ export const config = {
     "/create-events",
     "/update-events",
     "/events/:eventId",
+    "/manage-users",
   ],
 };

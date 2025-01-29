@@ -39,11 +39,11 @@ const page = async () => {
   const { data: events, error } = await getAllEvents(5, 1);
   console.log("EVENTS", events);
 
-  if (error) return alert(error);
+  if (error) return console.log(error);
 
   return (
     <div className="">
-      <div className="h-[60vh] lg:h-[80vh] w-full  overflow-hidden">
+      <div className="h-[60vh] lg:h-[80vh] w-full  overflow-hidden ">
         <ImageSlider slider={SLIDER} />
       </div>
 

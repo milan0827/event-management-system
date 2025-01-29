@@ -19,6 +19,7 @@ const ImageSlider = ({
   useEffect(() => {
     setInterval(() => {
       handleNext();
+      console.log("Step", step);
     }, 1000 * 5);
   }, []);
 

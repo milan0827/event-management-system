@@ -4,7 +4,7 @@ import CreateUpdateEventForm from "@/components/create-update-event-form/CreateU
 const page = () => {
   return (
     <div className=" ">
-      <AppTitle title="Create Events" />
+      <AppTitle title="Create Events" className="text-white" />
       <CreateUpdateEventForm />
     </div>
   );

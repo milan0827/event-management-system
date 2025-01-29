@@ -8,7 +8,7 @@ import React, { useId } from "react";
 const labelStyle = cva("text-[16px] cursor-pointer", {
   variants: {
     labelVariants: {
-      default: "text-zinc-600",
+      default: "text-gray-200",
       secondary: "text-gray-200",
     },
   },
