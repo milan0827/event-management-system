@@ -36,10 +36,7 @@ const SLIDER: Slider[] = [
 ];
 
 const page = async () => {
-  const { data: events, error } = await getAllEvents(5, 1);
-  console.log("EVENTS", events);
-
-  if (error) return console.log(error);
+  const { data: events } = await getAllEvents(5, 1);
 
   return (
     <div className="">

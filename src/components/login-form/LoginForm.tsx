@@ -1,7 +1,6 @@
 "use client";
 
 import { login, LoginErrors } from "@/app/actions/authAction";
-import { redirect } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { useFormStatus } from "react-dom";
 import AppTitle from "../app-title/AppTitle";

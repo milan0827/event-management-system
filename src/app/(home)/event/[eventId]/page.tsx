@@ -21,11 +21,11 @@ const SLIDER: Slider[] = [
   },
 ];
 
-const page = async ({ params }: { params: { eventId: Promise<string> } }) => {
-  const { eventId } = await params;
+const page = async ({ params }: { params: { eventId: string } }) => {
+  const { eventId } = params;
   const { data: event, error } = await getEvent(Number(eventId));
 
-  console.log("EVENTS", event);
+  console.log("Events", params);
 
   if (error) return <ErrorText />;
 

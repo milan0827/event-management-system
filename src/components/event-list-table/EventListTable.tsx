@@ -46,8 +46,6 @@ const EventListTable = ({ rowData }: { rowData: Event[] | null }) => {
     };
   }, []);
 
-  console.log("Pagination", pageSize);
-
   const colDefs: ColDef<Event>[] = [
     {
       field: "event_name",
@@ -84,7 +82,7 @@ const EventListTable = ({ rowData }: { rowData: Event[] | null }) => {
               label="VD"
               variant={"secondary"}
               size={"small"}
-              onClick={() => redirect(`/events/${params.data.id}`)}
+              onClick={() => redirect(`events/${params.data.id}`)}
             />
             <Button
               label="DL"
