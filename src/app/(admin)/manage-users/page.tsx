@@ -9,7 +9,7 @@ const page = async () => {
 
   console.log("USERS", users);
 
-  return <UserListTable rowData={users} />;
+  return <UserListTable rowData={users as never} />;
 };
 
 export default page;

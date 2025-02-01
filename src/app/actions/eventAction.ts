@@ -4,6 +4,7 @@ import { parseFormData } from "@/helpers";
 import { getEvent } from "@/lib/data-service";
 import { prisma } from "../../../prisma_init";
 import { EventSchema } from "./schema/eventSchema";
+import { revalidatePath } from "next/cache";
 
 export interface CreateEventErrors {
   errors?: {
@@ -33,6 +34,7 @@ export async function createEvents(
       },
     });
 
+    revalidatePath("/events");
     return { status: true };
   }
   const errors = results.error.flatten().fieldErrors;
@@ -60,6 +62,7 @@ export async function updateEvents(
         id: eventId,
       },
     });
+    revalidatePath("/events");
     return { status: true };
   }
 
@@ -78,6 +81,7 @@ export async function deleteEvents(eventId: number) {
       },
     });
 
+    revalidatePath("/events");
     return { error: null, status: true };
   } catch (error) {
     return { error, status: false };

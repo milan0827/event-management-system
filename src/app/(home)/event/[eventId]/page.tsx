@@ -21,8 +21,8 @@ const SLIDER: Slider[] = [
   },
 ];
 
-const page = async ({ params }: { params: { eventId: string } }) => {
-  const { eventId } = params;
+const page = async ({ params }: { params: Promise<{ eventId: string }> }) => {
+  const { eventId } = await params;
   const { data: event, error } = await getEvent(Number(eventId));
 
   console.log("Events", params);
