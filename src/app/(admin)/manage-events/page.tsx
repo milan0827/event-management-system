@@ -2,7 +2,13 @@ import AppTitle from "@/components/app-title/AppTitle";
 import ErrorText from "@/components/error-text/ErrorText";
 import EventListTable from "@/components/event-list-table/EventListTable";
 import { getAllEvents } from "@/lib/data-service";
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Event List",
+  description: "Add Events",
+};
 
 const page = async () => {
   const { data, error } = await getAllEvents();

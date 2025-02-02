@@ -41,6 +41,7 @@ export async function signup(formData: FormData): Promise<SignupErrors> {
   if (!results.success) {
     return { status: false, errors };
   }
+  console.log("FORM", formObj);
 
   // Check if user exists
   const userExists = await prisma.user.findUnique({

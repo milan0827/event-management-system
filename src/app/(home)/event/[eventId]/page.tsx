@@ -3,6 +3,21 @@ import ErrorText from "@/components/error-text/ErrorText";
 import ImageSlider from "@/components/image-slider/ImageSlider";
 import { getEvent } from "@/lib/data-service";
 import { Slider } from "@/types/type";
+import { Metadata } from "next";
+
+export const generateMetadata = async ({
+  params,
+}: {
+  params: Promise<{ eventId: string }>;
+}): Promise<Metadata> => {
+  const { eventId } = await params;
+  const { data: event } = await getEvent(Number(eventId));
+
+  return {
+    title: event?.event_name,
+    description: event?.description,
+  };
+};
 
 const SLIDER: Slider[] = [
   {

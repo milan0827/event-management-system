@@ -3,6 +3,13 @@ import EventCard from "@/components/event-card/EventCard";
 import ImageSlider from "@/components/image-slider/ImageSlider";
 import { getAllEvents } from "@/lib/data-service";
 import { Slider } from "@/types/type";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Event list",
+  description:
+    "The list of events happening | view all the event details like event date, total number of participaton, buy tickets and more related to events",
+};
 
 const SLIDER: Slider[] = [
   {
@@ -37,6 +44,10 @@ const SLIDER: Slider[] = [
 
 const page = async () => {
   const { data: events } = await getAllEvents(5, 1);
+  console.log(
+    "EVENTS",
+    events?.map((data) => data.id)
+  );
 
   return (
     <div className="">
